@@ -1,4 +1,5 @@
 import argparse
+import keys
 import json
 import requests
 
@@ -47,4 +48,4 @@ if(not success):
 else:
     accountID = info['accountId']
     getMatchesSuccess,matchesinfo = getMatchlist(accountID)
-
+    print(matchesinfo['totalGames'])
