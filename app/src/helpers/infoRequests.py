@@ -28,4 +28,4 @@ def processMatch(matchID):
     if(req.status_code == 200):
         return True, json.loads(req.content.decode('utf-8'))
     else:
-        return False, "GET match info failed, error code", str(req.status_code)
+        return False, "GET match info failed, error code" + str(req.status_code)
