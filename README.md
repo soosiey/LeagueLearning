@@ -16,3 +16,14 @@ League Learning is a python tool that will allow you to see stats of League of L
 
     * Possibly data visualization of various stats
     * Bayesian Inferencing in real-time for players in game (need a thorough GUI for ease of input, API does not allow for spectator mode in real-time)
+
+
+# Usage:
+
+To use, run the lol script in app/bin. You will need a developer key from the Riot API website which can be found [here](https://developer.riotgames.com/), and you have to put it into app/src/api_keys/keys.py as follows:
+
+```python
+api_token = <key>
+```
+
+This process must change. Maybe ask user to input? (This is not great either, keys must be private).
