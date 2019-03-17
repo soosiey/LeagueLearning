@@ -1,2 +1,4 @@
-__pycache__
-app/keys.py
+app/src/__pycache__
+app/src/helpers/__pychache__
+app/src/api_keys/__pycache__
+app/src/api_keys/keys.py

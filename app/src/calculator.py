@@ -1,6 +1,5 @@
 import argparse
-import infoRequests
-import sys
+import helpers.infoRequests as infoRequests
 import time
 
 parser = argparse.ArgumentParser(description = 'Get LoL user information')

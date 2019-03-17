@@ -1,6 +1,6 @@
 import json
 import requests
-from constants import *
+from helpers.constants import *
 
 def getSumInfo(username):
 

@@ -1,4 +1,6 @@
-import keys
+import sys
+sys.path.append("..")
+from api_keys import keys
 
 usernameGrabBase = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"
 headers={
