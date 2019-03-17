@@ -1,51 +1,48 @@
 import argparse
-import keys
-import json
-import requests
-
+import infoRequests
+import sys
+import time
 
 parser = argparse.ArgumentParser(description = 'Get LoL user information')
 parser.add_argument('username', metavar='uname', type=str, help='username of the user')
 args = parser.parse_args()
 
 
-def getSumInfo(username):
+def breakMatches(matchesInfo,player=args.username):
+    matches = min(50,len(matchesInfo['matches']))
+    matchList = matchesInfo['matches']
+    wins = 0
+    for match in range(0,matches):
+        if(match % 10 == 0):
+            time.sleep(1)
+        matchSuccess,matchInfo = infoRequests.processMatch(matchList[match]['gameId'])
+        if(not matchSuccess):
+            print(matchInfo)
+            sys.exit(0)
+        plid = -1
+        for p in matchInfo['participantIdentities']:
+            if(p['player']['summonerName'] ==  player):
+                plid = p['participantId']
+                break
+        for p in matchInfo['participants']:
+            if(not p['participantId'] == plid):
+                continue
+            else:
+                pstats = p['stats']
+                if(pstats['win']):
+                    wins += 1
+    return wins,matches
+success, info = infoRequests.getSumInfo(args.username)
 
-    api_url_base = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"
-    headers={
-        "Origin": None,
-        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-        "X-Riot-Token": "RGAPI-92b42658-cacf-48dd-976f-a6381290854a",
-        "Accept-Language": "en-US,en;q=0.5",
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:65.0) Gecko/20100101 Firefox/65.0"
-    }
-    api_url = api_url_base + username
-    req = requests.get(api_url, headers=headers)
-    if req.status_code == 200:
-        return True, json.loads(req.content.decode('utf-8'))
-    else:
-        return False ,"fail: " + str(req.status_code)
-
-def getMatchlist(accountID):
-    api_url_base = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/"
-    headers={
-        "Origin": None,
-        "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-        "X-Riot-Token": "RGAPI-92b42658-cacf-48dd-976f-a6381290854a",
-        "Accept-Language": "en-US,en;q=0.5",
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:65.0) Gecko/20100101 Firefox/65.0"
-    }
-    api_url = api_url_base + accountID
-    req = requests.get(api_url, headers=headers)
-    if req.status_code == 200:
-        return True, json.loads(req.content.decode('utf-8'))
-    else:
-        return False ,"fail: " + str(req.status_code)
-
-success, info = getSumInfo(args.username)
 if(not success):
     print(info)
-else:
-    accountID = info['accountId']
-    getMatchesSuccess,matchesinfo = getMatchlist(accountID)
-    print(matchesinfo['totalGames'])
+    sys.exit(0)
+
+accountID = info['accountId']
+getMatchesSuccess,matchesinfo = infoRequests.getMatchlist(accountID)
+if(not getMatchesSuccess):
+    print(matchesinfo)
+    sys.exit(0)
+
+w,m = breakMatches(matchesinfo)
+print("Recent W/L Ratio in", m, "games:",float(w)/float(m))
