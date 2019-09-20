@@ -43,7 +43,6 @@ for i in range(len(ninputs)):
 
 inputs = torch.Tensor(inputs)
 
-print(inputs.size())
 labels = torch.Tensor(labels)
 hiddenLayers = 100
 inputSize = 15
@@ -75,7 +74,6 @@ weights['d'] = None
 count = 0
 for f in model.parameters():
     x = f.data.tolist()
-    print(type(x))
     if(count == 0):
         weights['W'] = x
     elif(count == 1):

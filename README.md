@@ -39,3 +39,9 @@ This will learn the weights, and output them to app/src/outputs/weights.json. To
 ```bash
 python3 test.py
 ```
+
+
+# Examples
+
+We can see the training occur, and the loss decreases:
+![Loss](resources/sc1.png)
