@@ -2,7 +2,16 @@ from . import infoRequests as infoRequests
 import time
 import sys
 import json
+import tqdm
+import numpy
 
+DUO_SUPPORT = 5
+DUO_CARRY = 4
+DUO = 4.5
+TOP = 3
+MID = 2
+JUNGLE = 1
+OTHER = 0
 
 class summoner():
 
@@ -10,6 +19,8 @@ class summoner():
         self.dataset = {}
         self.dataset['name'] = name
         self.dataset['games'] = []
+        self.dataset['gameInputs'] = []
+        self.dataset['gameOutputs'] = []
 
     def getAccountID(self):
         success, info = infoRequests.getSumInfo(self.dataset['name'])
@@ -37,29 +48,34 @@ class summoner():
             current = i * 100
             self.getMatchlist(current)
 
-    def processMatches():
-        for match in range(len(self.dataset['matchList'])):
+    def processMatches(self):
+        wins = 0
+        for match in tqdm.tqdm(range(len(self.dataset['matchList']))):
             if(match % 10 == 0):
                 time.sleep(1)
-            if(match % 90 == 0):
+            if(match % 90 == 0 and match != 0):
                 time.sleep(120)
             success, info = infoRequests.processMatch(self.dataset['matchList'][match]['gameId'])
             if(not success):
-                print(matchInfo)
+                print(info)
                 return -1
+            self.dataset['games'].append(info)
             plid = -1
             for p in info['participantIdentities']:
-                if(p['player']['summonerName'] ==  player):
+                if(p['player']['summonerName'] ==  self.dataset['name']):
                     plid = p['participantId']
                     break
-            for p in matchInfo['participants']:
+            for p in info['participants']:
                 if(not p['participantId'] == plid):
                     continue
                 else:
                     pstats = p['stats']
                     if(pstats['win']):
+                        self.dataset['gameOutputs'].append(0)
                         wins += 1
-        return wins,matches
+                    else:
+                        self.dataset['gameOutputs'].append(1)
+        self.dataset['wins'] = wins
 
     def printToFile(self,f):
         with open(f,'w') as outfile:

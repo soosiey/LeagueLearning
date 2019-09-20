@@ -13,6 +13,7 @@ def collect():
     summoner = summon.summoner(args.username)
     summoner.getAccountID()
     summoner.getFullMatches()
+    summoner.processMatches()
     curr_path = os.path.dirname(__file__)
     curr_path += '/summoners/Hamper.json'
     summoner.printToFile(curr_path)
