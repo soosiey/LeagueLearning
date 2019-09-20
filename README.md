@@ -26,7 +26,7 @@ To use, run the runner script in app/bin. You will need a developer key from the
 ```python
 api_token = <key>
 ```
-
+This file must be created, app/src/api_keys/ will be empty when this repo is cloned.
 This process must change. Maybe ask user to input? (This is not great either, keys must be private).
 
 Once the script is run, there will be a json file in helpers/summoners. As of right now, it is going to be called Hamper.json. Next, run the movement.sh script in app/bin. Finally, run the following command in app/src:
