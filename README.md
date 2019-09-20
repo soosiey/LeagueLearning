@@ -45,3 +45,9 @@ python3 test.py
 
 We can see the training occur, and the loss decreases:
 ![Loss](resources/sc1.png)
+
+Finally, we test on the test set, and see that we get about 91% accuracy.
+![Testing](resources/sc2.png)
+
+## TODO:
+    * Try to see if we can have a moving probability during a person's game of win/loss.
