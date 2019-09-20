@@ -5,11 +5,12 @@ League Learning is a python tool that will allow you to see stats of League of L
 ## Currently finished:
 
     * Basic W/L statistic for recent games
+    * Perform logistic regression to get weights
+    * use weights on test set -> achieved ~91% accuracy
 
 ## Need to do:
 
     * Get ability to poll player game status (in game or not)
-    * Perform a learning test on test data set -> logistic regression
     * Perform a test on the fly at various points throughout a game
     * Wrap up project into a simple user interface
 ## Extras:

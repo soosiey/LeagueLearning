@@ -5,3 +5,9 @@ app/src/helpers/__pychache__/*
 app/src/api_keys/__pycache__
 app/src/api_keys/__pycache__/*
 app/src/api_keys/keys.py
+app/src/helpers/__pycache__/__init__.cpython-37.pyc
+app/src/helpers/__pycache__/constants.cpython-37.pyc
+app/src/helpers/__pycache__/dataCollection.cpython-37.pyc
+app/src/helpers/__pycache__/infoRequests.cpython-37.pyc
+app/src/helpers/__pycache__/summonerClass.cpython-37.pyc
+app/src/helpers/__pycache__/
