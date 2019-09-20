@@ -1,6 +1,6 @@
 import json
 import requests
-from helpers.constants import *
+from .constants import *
 
 def getSumInfo(username):
 
@@ -11,9 +11,11 @@ def getSumInfo(username):
     else:
         return False ,"GET username failed, error code" + str(req.status_code)
 
-def getMatchlist(accountID):
+def getMatchlist(accountID,index):
 
     api_url = MatchGrabBase + accountID
+    if(index != 0):
+        api_url += '?beginIndex=' + str(index)
     req = requests.get(api_url, headers=headers)
     if req.status_code == 200:
         return True, json.loads(req.content.decode('utf-8'))
