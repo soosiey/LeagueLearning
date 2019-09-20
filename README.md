@@ -6,7 +6,7 @@ League Learning is a python tool that will allow you to see stats of League of L
 
     * Basic W/L statistic for recent games
     * Perform logistic regression to get weights
-    * use weights on test set -> achieved ~91% accuracy
+    * Use weights on test set -> achieved ~91% accuracy
 
 ## Need to do:
 
@@ -21,10 +21,21 @@ League Learning is a python tool that will allow you to see stats of League of L
 
 # Usage:
 
-To use, run the lol script in app/bin. You will need a developer key from the Riot API website which can be found [here](https://developer.riotgames.com/), and you have to put it into app/src/api_keys/keys.py as follows:
+To use, run the runner script in app/bin. You will need a developer key from the Riot API website which can be found [here](https://developer.riotgames.com/), and you have to put it into app/src/api_keys/keys.py as follows:
 
 ```python
 api_token = <key>
 ```
 
 This process must change. Maybe ask user to input? (This is not great either, keys must be private).
+
+Once the script is run, there will be a json file in helpers/summoners. As of right now, it is going to be called Hamper.json. Next, run the movement.sh script in app/bin. Finally, run the following command in app/src:
+
+```bash
+python3 regression.py
+```
+This will learn the weights, and output them to app/src/outputs/weights.json. To test the accuracy of the weights, go to /app/src and run:
+
+```bash
+python3 test.py
+```
