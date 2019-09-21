@@ -10,6 +10,8 @@ weights = None
 with open(currPath) as f:
     weights = json.load(f)
 
+for i in weights:
+    weights[i] = np.array(weights[i])
 summoner = player.summoner("")
 currPath = os.path.dirname(os.path.abspath(__file__))
 currPath += '/helpers/summoners/Hamper.json'
@@ -26,7 +28,6 @@ for i in range(len(ninputs)):
         labels.append(nlabels[i])
 
 inputs = np.array(inputs)
-
 labels = np.array(labels)
 def ReLU(x):
     for i in range(len(x)):
@@ -43,6 +44,10 @@ for i in range(len(inputs)):
     out += weights['b']
     out = ReLU(out)
     out = np.matmul(weights['C'],out)
+    out += weights['d']
+    out = ReLU(out)
+    out = np.matmul(weights['H'],out)
+    out += weights['e']
     out = sigmoid(out)
     y = 0
     if(out > .5):
