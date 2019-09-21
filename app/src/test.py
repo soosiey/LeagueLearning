@@ -16,7 +16,6 @@ summoner = player.summoner("")
 currPath = os.path.dirname(os.path.abspath(__file__))
 currPath += '/helpers/summoners/Hamper.json'
 summoner.load(currPath)
-
 ninputs = summoner.dataset['gameInputs']
 
 nlabels = summoner.dataset['gameOutputs']
