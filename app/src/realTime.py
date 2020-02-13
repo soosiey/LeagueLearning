@@ -37,10 +37,10 @@ input01 = np.zeros(15)
 input10 = np.zeros(15)
 input11 = np.zeros(15)
 
-myChampion = "Leona"
+myChampion = "Blitzcrank"
 myRole = DUO_SUPPORT
-myTeam = ['Aatrox', 'Akali', 'Kayle','Ashe']
-otherTeam = ['Thresh', 'Caitlyn', 'Nasus', 'Leblanc','Zac']
+myTeam = ['Quinn', 'Yasuo', 'Khazix','Sona']
+otherTeam = ['Morgana', 'Caitlyn', 'Irelia', 'Gangplank','Kayn']
 
 input00[0] = champions[myChampion]
 input01[0] = champions[myChampion]

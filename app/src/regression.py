@@ -42,7 +42,7 @@ epochs = 5000
 nlabels = summoner.dataset['gameOutputs']
 inputs = []
 labels = []
-d = np.random.binomial(size=len(ninputs),n=1,p=.8)
+d = np.random.binomial(size=len(ninputs),n=1,p=1)
 for i in range(len(ninputs)):
     if(ninputs[i][14] != -1 and d[i] == 1):
         inputs.append(ninputs[i])
@@ -50,13 +50,13 @@ for i in range(len(ninputs)):
 
 
 losses = []
-hiddenLayers = 1000
+hiddenLayers = 500
 inputSize = 15
 model = Net(inputSize, hiddenLayers)
 alpha = .01
 criterion = nn.BCEWithLogitsLoss()
 optim = torch.optim.SGD(model.parameters(), lr = alpha)
-scheduler = torch.optim.lr_scheduler.StepLR(optim,step_size = 500,gamma = .1)
+scheduler = torch.optim.lr_scheduler.StepLR(optim,step_size = 4000,gamma = .1)
 optim.zero_grad()
 for epoch in range(epochs):
 
